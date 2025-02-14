@@ -1,0 +1,33 @@
+<div class="conatainer mt-5">
+    <div class="text-center">
+        <h1 class="text-success">Todos</h1>
+        <input type="text" class="me-2" [(ngModel)]="name" name="name" />
+        <button type="submit" class="btn-lg btn-primary" (click)="onSubmit(name)">Add Todo</button>
+    </div>
+    <div class="container mt-3" *ngIf="nameArray.length > 0">
+        <h2>Todo-List</h2>        
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>ToDo Name</th>
+                    <th>Completed</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let array of nameArray; let i = index">
+                    <td [ngStyle]="array.checked ? {'text-decoration': 'line-through', 'color': 'red'} : {}">{{ array.name }}</td> 
+                    <td><input class="form-check-input p-2" type="checkbox" value="" (change)="onCheckboxChange($event, i)"></td> 
+                    <td>
+                        <button class="close-button">
+                            <span *ngIf="array.checked==false">❌</span>
+                            <span *ngIf="array.checked == true">✅</span>
+                        </button>
+                    </td>
+                    <td><button class="btn btn-danger text-center" (click)="deleteRow( i )">Delete Todo</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
